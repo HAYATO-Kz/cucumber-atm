@@ -6,11 +6,13 @@ package ku.atm;
 */
 public class BankAccount {
    private double balance;
+   private double overdraft;
 
    /**
       Constructs a bank account with a zero balance.
    */
    public BankAccount() {
+      overdraft = 0;
       balance = 0;
    }
 
@@ -18,8 +20,9 @@ public class BankAccount {
       Constructs a bank account with a given balance.
       @param initialBalance the initial balance
    */
-   public BankAccount(double initialBalance) {
+   public BankAccount(double initialBalance,double initialOverdraft) {
       balance = initialBalance;
+      overdraft = initialOverdraft;
    }
  
    /** 
@@ -36,7 +39,10 @@ public class BankAccount {
    */
    public void withdraw(double amount) throws NotEnoughBalanceException {
        if (amount > balance)
-         throw new NotEnoughBalanceException("cannot withdraw more than balance");
+         if ( (amount-balance) > overdraft) throw new NotEnoughBalanceException("cannot withdraw more than balance");
+         else {
+            overdraft -= (amount-balance);
+         }
        balance = balance - amount;
    }
 

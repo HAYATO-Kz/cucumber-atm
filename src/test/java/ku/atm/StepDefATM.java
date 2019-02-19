@@ -26,7 +26,12 @@ public class StepDefATM {
 
     @Given("a customer with id (\\d+) and pin (\\d+) with balance (.*) exists")
     public void a_customer_with_id_and_pin_with_balance_exists(int id, int pin, double balance) {
-        bank.addCustomer(new Customer(id, pin, balance));
+        bank.addCustomer(new Customer(id, pin, balance,0));
+    }
+
+    @Given("a customer with id (\\d+) and pin (\\d+) with overdraft (.*) and balance (.*) exists")
+    public void a_customer_with_id_and_pin_with_balance_and_overdraft_exists(int id, int pin, double overdraft, double balance) {
+        bank.addCustomer(new Customer(id, pin, balance,overdraft));
     }
 
     @When("I login to ATM with id (\\d+) and pin (\\d+)")

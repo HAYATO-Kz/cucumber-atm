@@ -11,10 +11,11 @@ public class UnitTestBankAccount {
 
     BankAccount account;
     int initialBalance = 100;
+    int initialOverdraft = 100;
 
     @BeforeEach
     void init() {
-        account = new BankAccount(initialBalance);
+        account = new BankAccount(initialBalance,initialOverdraft);
     }
 
     @Test
